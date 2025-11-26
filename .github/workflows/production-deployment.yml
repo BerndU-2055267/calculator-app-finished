@@ -1,0 +1,16 @@
+name: Production Deployment
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute remote SSH commands using password
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.PROD_IP }}
+          username: ubuntu
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          run: ls
